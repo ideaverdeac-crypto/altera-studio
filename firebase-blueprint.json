@@ -1,0 +1,139 @@
+{
+  "entities": {
+    "siteConfig": {
+      "title": "Site Configuration",
+      "description": "Global configuration for the website content",
+      "type": "object",
+      "properties": {
+        "brandName": { "type": "string" },
+        "hero": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "subtitle": { "type": "string" },
+            "videoUrl": { "type": "string" }
+          }
+        },
+        "manifesto": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" }
+          }
+        },
+        "problems": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "benefits": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "cards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "tech": {
+          "type": "object",
+          "properties": {
+            "tagline": { "type": "string" },
+            "title": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "services": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "imageUrl": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "methodology": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            },
+            "testimonial": {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "author": { "type": "string" },
+                "role": { "type": "string" }
+              }
+            }
+          }
+        },
+        "footer": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "subtitle": { "type": "string" }
+          }
+        },
+        "socialLinks": {
+          "type": "object",
+          "properties": {
+            "instagram": { "type": "string" },
+            "linkedin": { "type": "string" },
+            "vimeo": { "type": "string" },
+            "whatsapp": { "type": "string" }
+          }
+        },
+        "portfolioUrl": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/config/site": {
+      "schema": "siteConfig",
+      "description": "Main website content configuration"
+    }
+  }
+}

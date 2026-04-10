@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function for site config validation
+    function isValidSiteConfig(data) {
+      return data.brandName is string &&
+             data.hero is map &&
+             data.hero.title is string &&
+             data.hero.subtitle is string &&
+             data.hero.videoUrl is string &&
+             data.socialLinks is map &&
+             data.portfolioUrl is string;
+    }
+
+    match /config/site {
+      // Allow public read
+      allow read: if true;
+      // Allow write for now (prototype phase) but validate data
+      allow write: if isValidSiteConfig(request.resource.data);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
