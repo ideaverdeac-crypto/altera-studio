@@ -13,7 +13,7 @@ import {
   Heart, 
   TrendingUp, 
   Layers, 
-  Video, 
+  Video as VideoIcon, 
   Palette, 
   Code, 
   ArrowRight,
@@ -171,6 +171,10 @@ export default function App() {
   const heroY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(heroScroll, [0, 0.8], [1, 0]);
 
+  const smartphoneRotate = useTransform(heroScroll, [0, 1], [-5, 5]);
+  const smartphoneY = useTransform(heroScroll, [0, 1], ["0%", "10%"]);
+  const smartphoneScale = useTransform(heroScroll, [0, 1], [1, 0.9]);
+
   const { scrollYProgress } = useScroll({
     target: manifestoRef,
     offset: ["start end", "end start"]
@@ -302,14 +306,77 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0, x: 100, rotate: 10 }}
           animate={{ opacity: 1, x: 0, rotate: -5 }}
+          style={{ 
+            y: smartphoneY, 
+            rotate: smartphoneRotate,
+            scale: smartphoneScale
+          }}
+          whileHover={{ 
+            scale: 1.02, 
+            rotate: 0,
+            x: -20,
+            transition: { duration: 0.4, ease: "easeOut" }
+          }}
           transition={{ duration: 1.2, delay: 0.2 }}
-          className="absolute right-[-10%] top-[20%] hidden lg:block w-[400px] h-[800px] bg-surface border-[12px] border-white/10 rounded-[60px] shadow-2xl overflow-hidden"
+          className="absolute right-[-5%] top-[15%] hidden lg:block w-[380px] h-[760px] bg-dark border-[12px] border-white/10 rounded-[60px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden z-20"
         >
-          <div className="w-full h-full bg-gradient-to-br from-neon/20 to-transparent p-4">
-            <div className="w-full h-full rounded-[40px] bg-dark border border-white/5 flex items-center justify-center">
-              <Smartphone className="w-24 h-24 text-neon opacity-20" />
+          {/* Internal Screen Content */}
+          <div className="relative w-full h-full bg-dark overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-neon/10 via-transparent to-dark/80" />
+            
+            {/* Mock App UI */}
+            <div className="p-8 pt-16 space-y-6">
+              <div className="flex justify-between items-center">
+                <div className="w-12 h-12 rounded-full bg-white/10" />
+                <div className="flex gap-2">
+                  <div className="w-8 h-2 rounded-full bg-neon/40" />
+                  <div className="w-4 h-2 rounded-full bg-white/10" />
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="h-8 w-3/4 bg-white/10 rounded-lg" />
+                <div className="h-4 w-full bg-white/5 rounded-lg" />
+                <div className="h-4 w-5/6 bg-white/5 rounded-lg" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                <div className="aspect-square bg-white/5 rounded-2xl border border-white/10" />
+                <div className="aspect-square bg-white/5 rounded-2xl border border-white/10" />
+              </div>
+
+              <div className="h-32 w-full bg-neon/5 rounded-3xl border border-neon/20 flex items-center justify-center">
+                <Smartphone className="w-12 h-12 text-neon opacity-40 animate-pulse" />
+              </div>
+
+              <div className="space-y-4 pt-4">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 shrink-0" />
+                    <div className="space-y-2 w-full">
+                      <div className="h-2 w-1/2 bg-white/10 rounded-full" />
+                      <div className="h-2 w-full bg-white/5 rounded-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {/* Floating Elements */}
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 -right-4 w-24 h-24 bg-neon/20 blur-2xl rounded-full"
+            />
+            <motion.div 
+              animate={{ y: [0, 15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-1/4 -left-4 w-32 h-32 bg-violet/20 blur-3xl rounded-full"
+            />
           </div>
+
+          {/* Screen Glare */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-transparent" />
         </motion.div>
       </Section>
 
@@ -616,7 +683,7 @@ export default function App() {
             <div className="text-2xl font-black tracking-tighter uppercase">{config.brandName}</div>
             <div className="flex gap-6">
               <a href={config.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors"><Instagram /></a>
-              <a href={config.socialLinks.vimeo} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors"><Video /></a>
+              <a href={config.socialLinks.vimeo} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors"><VideoIcon /></a>
               <a href={config.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors"><Linkedin /></a>
             </div>
             <div className="text-sm font-medium opacity-60">
